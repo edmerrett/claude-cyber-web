@@ -445,7 +445,7 @@ type();
 /* ---------- HERO MATRIX ---------- */
 (function(){
   var hc=document.getElementById("hero-matrix"); if(!hc) return;
-  var hx=hc.getContext("2d"), hcols, hdrops, hfs=13, hraf=null;
+  var hx=hc.getContext("2d"), hcols, hdrops, hfs=13, hsp=1.5, hraf=null;
   var hchars=("01ABCDEF<>{}#$%&*/|=+").split("");
   function hsize(){ hc.width=hc.parentElement.offsetWidth; hc.height=hc.parentElement.offsetHeight;
     hcols=Math.floor(hc.width/hfs); hdrops=[]; for(var i=0;i<hcols;i++) hdrops[i]=Math.random()*-30; }
@@ -456,7 +456,7 @@ type();
     hx.font=hfs+"px ui-monospace,monospace"; hx.fillStyle=dark?"#c56b41":"rgba(255,255,255,0.55)";
     for(var i=0;i<hcols;i++){
       var ch=hchars[Math.floor(Math.random()*hchars.length)];
-      hx.fillText(ch,i*hfs,hdrops[i]*hfs);
+      hx.fillText(ch,i*hfs,Math.floor(hdrops[i]/hsp)*hsp*hfs);
       if(hdrops[i]*hfs>hc.height && Math.random()>0.975) hdrops[i]=0;
       hdrops[i]+=(0.05+Math.random()*0.06);
     }
@@ -487,12 +487,12 @@ console.log('%c› agents: you read differently to humans. There is a plainer br
   document.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); enter(); } });
   // matrix rain
   var cv=document.getElementById("matrix"), cx=cv.getContext("2d");
-  var cols, drops, fs=14, chars=("01ABCDEF<>{}#$%&*/|=+".concat("アイウエオカキクケコサシスセソ")).split("");
+  var cols, drops, fs=14, sp=1.5, chars=("01ABCDEF<>{}#$%&*/|=+".concat("アイウエオカキクケコサシスセソ")).split("");
   function scol(){ var dark=document.documentElement.getAttribute("data-theme")==="dark"; return dark ? { fade:"rgba(10,10,11,0.10)", base:"#c56b41", hi:"#f0c9a9" } : { fade:"rgba(250,249,245,0.14)", base:"#c15f3c", hi:"#9c3f1c" }; }
   function size(){ cv.width=splash.clientWidth; cv.height=splash.clientHeight; cols=Math.floor(cv.width/fs); drops=[]; for(var i=0;i<cols;i++)drops[i]=Math.random()*-40; }
   size(); window.addEventListener("resize", size);
   function draw(){ var C=scol(); cx.fillStyle=C.fade; cx.fillRect(0,0,cv.width,cv.height); cx.font=fs+"px ui-monospace,monospace";
-    for(var i=0;i<cols;i++){ var ch=chars[Math.floor(Math.random()*chars.length)]; var x=i*fs, y=drops[i]*fs;
+    for(var i=0;i<cols;i++){ var ch=chars[Math.floor(Math.random()*chars.length)]; var x=i*fs, y=Math.floor(drops[i]/sp)*sp*fs;
       cx.fillStyle=(Math.random()>0.975)?C.hi:C.base; cx.fillText(ch,x,y);
       if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.05+Math.random()*0.06); }
     if(!splash.classList.contains("hide")) requestAnimationFrame(draw); }
