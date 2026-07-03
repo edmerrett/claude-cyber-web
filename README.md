@@ -1,10 +1,12 @@
 # Claude Cyber Community — Events
 
+**Live: <https://claude-cyber.com>**
+
 A single-page, zero-build events site for the Claude Cyber Community: talks,
 workshops, hackathons and meet-ups for security people building with Claude and
 AI agents. Hosted free on Cloudflare Pages.
 
-It is intentionally a **plain static site** — one `index.html` with inline CSS
+It is intentionally a **plain static site**: one `index.html` with inline CSS
 and JS, no framework, no build step, no dependencies. Editing means editing HTML.
 
 ---
@@ -14,6 +16,7 @@ and JS, no framework, no build step, no dependencies. Editing means editing HTML
 ```
 public/                    # ← the entire deployed site (Cloudflare output dir)
   index.html               # the whole site: markup, styles, timeline logic, EVENTS data
+  llms.txt                 # agent-facing brief (part of the easter-egg trail)
   _headers                 # forces text/plain on /.well-known/*
   .well-known/security.txt # disclosure contact + a base64 easter-egg nudge
 .claude/skills/add-event/  # skill: add an event from a Luma URL
@@ -21,7 +24,7 @@ README.md · CLAUDE.md · .gitignore
 ```
 
 Everything outside `public/` (this README, `CLAUDE.md`, the skill) is repo-only
-and is **not** served — the build output directory is `public/`.
+and is **not** served; the build output directory is `public/`.
 
 ---
 
@@ -56,6 +59,9 @@ events with that code.
 **Fastest path:** in Claude Code, run the `add-event` skill with a Luma URL —
 see [`.claude/skills/add-event/SKILL.md`](.claude/skills/add-event/SKILL.md).
 
+There is no build step to catch mistakes: a syntax error in `EVENTS` silently
+blanks the timeline, so always load the page locally before pushing.
+
 ---
 
 ## Local preview
@@ -64,12 +70,11 @@ No build. Serve the folder with any static server:
 
 ```bash
 npx serve public
-# or
-python3 -m http.server -d public 8000
 ```
 
-Then open the printed URL. `/.well-known/security.txt` is served correctly by
-these servers and by Cloudflare in production.
+Then open the printed URL and confirm the timeline renders.
+`/.well-known/security.txt` is served correctly by these servers and by
+Cloudflare in production.
 
 ---
 
@@ -77,14 +82,13 @@ these servers and by Cloudflare in production.
 
 Hosted on **Cloudflare Pages**, **Git-connected** to this repo:
 
-- Production branch: `main`
+- Production domain: <https://claude-cyber.com> (Pages subdomain: `claude-cyber-web.pages.dev`)
+- Production branch: `main` (protected: changes land via pull request)
 - Build command: *(none)*
 - Build output directory: `public`
 
-Every push to `main` triggers an automatic deploy — no CI workflow in this repo.
-Pushes to other branches produce preview deployments.
-
-Live: <https://claude-cyber-community.pages.dev>
+Every merge to `main` triggers an automatic deploy; there is no CI workflow in
+this repo by design. Pushes to other branches produce preview deployments.
 
 ---
 
