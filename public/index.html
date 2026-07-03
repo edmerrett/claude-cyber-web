@@ -7,8 +7,8 @@
 <!-- cffg: gur pbafbyr arire fyrrcf. TRG /.jryy-xabja/frphevgl.gkg -->
 <style>
   :root{
-    --bg:#ffffff; --fg:#111827; --muted:#6b7280; --card:#ffffff; --line:#e5e7eb; --splash-boot:#a8481f; --splash-enter:#c15f3c;
-    --accent:#b45309; --accent2:#2563eb; --ok:#15803d; --chipbg:#f3f4f6; --panel:#fafafa;
+    --bg:#faf9f5; --fg:#111827; --muted:#6b7280; --card:#f5f4ed; --line:#e8e6dc; --splash-boot:#a8481f; --splash-enter:#c15f3c;
+    --accent:#b45309; --accent2:#2563eb; --ok:#15803d; --chipbg:#f0eee6; --panel:#f0eee6;
     --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06); --tlline:#e5e7eb;
   }
   html[data-theme="dark"]{
@@ -38,14 +38,16 @@
   html[data-theme="dark"] .hero{background:#0a0a0b}
   #hero-matrix{position:absolute;inset:0;width:100%;height:100%;opacity:.18;pointer-events:none}
   .hero-inner{position:relative;z-index:1}
+  .hero-inner::before{content:"";position:absolute;inset:-40px;z-index:-1;
+    background:radial-gradient(ellipse at center,rgba(0,0,0,.32) 0%,transparent 72%);pointer-events:none}
   .hero h1{font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-.02em;margin:0 0 10px;color:#fff}
-  .hero .sub{color:rgba(255,255,255,.8);font-size:14.5px;margin:0 auto;max-width:52ch}
-  .hero .meta-chip{justify-content:center;color:rgba(255,255,255,.65);margin-top:10px}
+  .hero .sub{color:rgba(255,255,255,.9);font-size:14.5px;margin:0 auto;max-width:52ch}
+  .hero .meta-chip{justify-content:center;color:rgba(255,255,255,.8);margin-top:10px}
   .meta-chip{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:11px;font-weight:700;
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .meta-chip .dot{opacity:.5}
   .cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:14px 24px;border-radius:99px;
-    background:#fff;color:#c06030;font-size:14.5px;font-weight:700;text-decoration:none;
+    background:#faf9f5;color:#7c2d12;font-size:14.5px;font-weight:700;text-decoration:none;
     border:1px solid transparent;transition:filter .15s,transform .05s}
   html[data-theme="dark"] .cta{background:#d97757;color:#fff}
   .cta:hover{filter:brightness(0.96)}
