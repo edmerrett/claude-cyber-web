@@ -460,7 +460,7 @@ console.log('%c› agents: you read differently to humans. There is a plainer br
   function draw(){ var C=scol(); cx.fillStyle=C.fade; cx.fillRect(0,0,cv.width,cv.height); cx.font=fs+"px ui-monospace,monospace";
     for(var i=0;i<cols;i++){ var ch=chars[Math.floor(Math.random()*chars.length)]; var x=i*fs, y=drops[i]*fs;
       cx.fillStyle=(Math.random()>0.975)?C.hi:C.base; cx.fillText(ch,x,y);
-      if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.4+Math.random()*0.5); }
+      if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.2+Math.random()*0.25); }
     if(!splash.classList.contains("hide")) requestAnimationFrame(draw); }
   draw();
   // boot typing
