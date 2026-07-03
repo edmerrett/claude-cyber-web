@@ -32,18 +32,25 @@
     box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
   @media(max-width:560px){.brand span:not(.brand-mark){display:none}.topbar-in{padding:10px 16px}}
   .wrap{max-width:960px;margin:0 auto;padding:24px 20px 80px}
-  header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:22px}
-  header.top h1{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0}
-  .sub{color:var(--muted);font-size:13px;margin-top:2px;max-width:52ch}
+
+  /* hero banner */
+  .hero{position:relative;overflow:hidden;background:#d97757;text-align:center;padding:56px 24px 48px;color:#fff}
+  html[data-theme="dark"] .hero{background:#0a0a0b}
+  #hero-matrix{position:absolute;inset:0;width:100%;height:100%;opacity:.18;pointer-events:none}
+  .hero-inner{position:relative;z-index:1}
+  .hero h1{font-size:clamp(24px,4vw,38px);font-weight:700;letter-spacing:-.02em;margin:0 0 10px;color:#fff}
+  .hero .sub{color:rgba(255,255,255,.8);font-size:14.5px;margin:0 auto;max-width:52ch}
+  .hero .meta-chip{justify-content:center;color:rgba(255,255,255,.65);margin-top:10px}
   .meta-chip{display:flex;gap:8px;align-items:center;margin-top:10px;font-size:11px;font-weight:700;
     letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
   .meta-chip .dot{opacity:.5}
-  .cta{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:11px 18px;border-radius:99px;
-    background:var(--accent);color:#fff;font-size:13.5px;font-weight:700;text-decoration:none;
+  .cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:14px 24px;border-radius:99px;
+    background:#fff;color:#c06030;font-size:14.5px;font-weight:700;text-decoration:none;
     border:1px solid transparent;transition:filter .15s,transform .05s}
-  .cta:hover{filter:brightness(1.06)}
+  html[data-theme="dark"] .cta{background:#d97757;color:#fff}
+  .cta:hover{filter:brightness(0.96)}
   .cta:active{transform:translateY(1px)}
-  .cta .icon{width:16px;height:16px}
+  .cta .icon{width:17px;height:17px}
   h2.sec{font-size:15px;font-weight:700;letter-spacing:-.01em;margin:34px 0 14px;
     text-transform:uppercase;font-size:12px;letter-spacing:.08em;color:var(--muted)}
   html{scroll-behavior:smooth}
@@ -129,8 +136,7 @@
   /* --- About: event types --- */
   .types{display:grid;grid-template-columns:1fr;gap:14px}
   @media(min-width:720px){.types{grid-template-columns:1fr 1fr 1fr}}
-  .type{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow);transition:transform .18s,border-color .18s}
-  .type:hover{transform:translateY(-3px);border-color:var(--accent)}
+  .type{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
   .type .ic{font-size:22px}
   .type h3{font-size:15px;margin:10px 0 6px;font-weight:650}
   .type p{font-size:13px;color:var(--muted);margin:0}
@@ -207,7 +213,7 @@
     · and, at the root, a plainer brief for the machines (/llms.txt)
   Behind both waits the same old arcade spell. Earn it.
 -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="15 2 15 7 20 7"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="11" y2="9"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol><symbol id="i-moon" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></symbol><symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol><symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></symbol><symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></symbol><symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></symbol><symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol><symbol id="i-unlock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></symbol><symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol><symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><polyline points="15 2 15 7 20 7"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="8" y1="9" x2="11" y2="9"/></symbol><symbol id="i-video" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8Z"/><rect x="2" y="6" width="14" height="12" rx="2"/></symbol><symbol id="i-ticket" viewBox="0 0 24 24"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2M13 11v2M13 17v2"/></symbol><symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol><symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></symbol></defs></svg>
 <div id="splash">
   <canvas id="matrix"></canvas>
   <div class="scanlines"></div>
@@ -240,15 +246,17 @@
     </div>
   </div></header>
 
+<section class="hero" id="top">
+  <canvas id="hero-matrix"></canvas>
+  <div class="hero-inner">
+    <h1>Claude Cyber Community</h1>
+    <div class="sub">For security people building with Claude &amp; AI agents — talks, workshops, hackathons &amp; meet-ups.</div>
+    <div class="meta-chip"><span>Free</span><span class="dot">&middot;</span><span>Global</span><span class="dot">&middot;</span><span>Community-run</span></div>
+    <a class="cta" href="https://luma.com/claude-1gof" target="_blank" rel="noopener"><svg class="icon"><use href="#i-mail"></use></svg> Get notified of the next event</a>
+  </div>
+</section>
+
 <div class="wrap">
-  <header class="top">
-    <div>
-      <h1>Welcome!</h1>
-      <div class="sub">A community for security people building with Claude &amp; AI agents — talks, workshops, hackathons &amp; meet-ups.</div>
-      <div class="meta-chip"><span>Free</span><span class="dot">&middot;</span><span>Global</span><span class="dot">&middot;</span><span>Community-run</span></div>
-      <a class="cta" href="https://luma.com/claude-1gof" target="_blank" rel="noopener"><svg class="icon"><use href="#i-ticket"></use></svg> Get notified of the next event</a>
-    </div>
-  </header>
 
   <div class="bot">
     <div class="avatar">
@@ -378,7 +386,7 @@ function renderTimeline(){
   }
   if(upcoming.length){
     var hold=document.createElement('div'); hold.className='tl-hold';
-    hold.innerHTML='<div class="tl-hold-card"><b>More to come</b><span>New meet-ups, workshops &amp; hackathons are in the works — hit <em>Get notified</em> up top to hear first.</span></div>';
+    hold.innerHTML='<div class="tl-hold-card"><b>More to come</b><span>New meet-ups, workshops &amp; hackathons are in the works — <a href="https://luma.com/claude-1gof" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600">get notified</a> to hear first.</span></div>';
     tl.appendChild(hold);
   }
   if(past.length){
@@ -431,6 +439,30 @@ function type(){ var t=TASKS[ti]; if(ci<=t.length){ txt.textContent=t.slice(0,ci
     if(ti===TASKS.length-1){ setTimeout(function(){ok.classList.add('show');},300);} ti=(ti+1)%TASKS.length;
     if(ti===0){progress=0;ok.classList.remove('show');} ci=0; setTimeout(function(){txt.textContent='';type();},950);} }
 type();
+
+/* ---------- HERO MATRIX ---------- */
+(function(){
+  var hc=document.getElementById("hero-matrix"); if(!hc) return;
+  var hx=hc.getContext("2d"), hcols, hdrops, hfs=13, hraf=null;
+  var hchars=("01ABCDEF<>{}#$%&*/|=+").split("");
+  function hsize(){ hc.width=hc.parentElement.offsetWidth; hc.height=hc.parentElement.offsetHeight;
+    hcols=Math.floor(hc.width/hfs); hdrops=[]; for(var i=0;i<hcols;i++) hdrops[i]=Math.random()*-30; }
+  hsize(); window.addEventListener("resize",hsize);
+  function hdraw(){
+    var dark=document.documentElement.getAttribute("data-theme")==="dark";
+    hx.fillStyle=dark?"rgba(10,10,11,0.12)":"rgba(217,119,87,0.18)"; hx.fillRect(0,0,hc.width,hc.height);
+    hx.font=hfs+"px ui-monospace,monospace"; hx.fillStyle=dark?"#c56b41":"rgba(255,255,255,0.55)";
+    for(var i=0;i<hcols;i++){
+      var ch=hchars[Math.floor(Math.random()*hchars.length)];
+      hx.fillText(ch,i*hfs,hdrops[i]*hfs);
+      if(hdrops[i]*hfs>hc.height && Math.random()>0.975) hdrops[i]=0;
+      hdrops[i]+=(0.2+Math.random()*0.25);
+    }
+    hraf=requestAnimationFrame(hdraw);
+  }
+  document.addEventListener("visibilitychange",function(){ if(document.hidden){cancelAnimationFrame(hraf);}else{hdraw();} });
+  hdraw();
+})();
 
 /* ---------- EASTER EGG (layer 3: Konami) ---------- */
 var KONAMI=[38,38,40,40,37,39,37,39,66,65]; var kp=[];
