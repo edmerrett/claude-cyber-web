@@ -445,20 +445,21 @@ type();
 /* ---------- HERO MATRIX ---------- */
 (function(){
   var hc=document.getElementById("hero-matrix"); if(!hc) return;
-  var hx=hc.getContext("2d"), hcols, hdrops, hfs=13, hraf=null;
+  var hx=hc.getContext("2d"), hcols, hdrops, hglyph, hnxt, hys, hfs=13, hraf=null;
   var hchars=("01ABCDEF<>{}#$%&*/|=+").split("");
   function hsize(){ hc.width=hc.parentElement.offsetWidth; hc.height=hc.parentElement.offsetHeight;
-    hcols=Math.floor(hc.width/hfs); hdrops=[]; for(var i=0;i<hcols;i++) hdrops[i]=Math.random()*-30; }
+    hcols=Math.floor(hc.width/hfs); hdrops=[]; hglyph=[]; hnxt=[]; hys=[]; for(var i=0;i<hcols;i++){ hdrops[i]=Math.random()*-30; hnxt[i]=hdrops[i]; } }
   hsize(); window.addEventListener("resize",hsize);
   function hdraw(){
     var dark=document.documentElement.getAttribute("data-theme")==="dark";
     hx.fillStyle=dark?"rgba(10,10,11,0.12)":"rgba(217,119,87,0.18)"; hx.fillRect(0,0,hc.width,hc.height);
     hx.font=hfs+"px ui-monospace,monospace"; hx.fillStyle=dark?"#c56b41":"rgba(255,255,255,0.55)";
     for(var i=0;i<hcols;i++){
-      var ch=hchars[Math.floor(Math.random()*hchars.length)];
-      hx.fillText(ch,i*hfs,hdrops[i]*hfs);
-      if(hdrops[i]*hfs>hc.height && Math.random()>0.975) hdrops[i]=0;
       hdrops[i]+=(0.05+Math.random()*0.06);
+      /* glyph persists between stamps (no flicker); next gap re-rolled 0.4-0.9 cells for organic spacing */
+      if(hdrops[i]>=hnxt[i]||!hglyph[i]){ hglyph[i]=hchars[Math.floor(Math.random()*hchars.length)]; hys[i]=hdrops[i]*hfs; hnxt[i]=hdrops[i]+(0.4+Math.random()*0.5); }
+      hx.fillText(hglyph[i],i*hfs,hys[i]);
+      if(hdrops[i]*hfs>hc.height && Math.random()>0.975){ hdrops[i]=0; hnxt[i]=0; }
     }
     hraf=requestAnimationFrame(hdraw);
   }
@@ -487,14 +488,16 @@ console.log('%c› agents: you read differently to humans. There is a plainer br
   document.addEventListener("keydown", function(e){ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); enter(); } });
   // matrix rain
   var cv=document.getElementById("matrix"), cx=cv.getContext("2d");
-  var cols, drops, fs=14, chars=("01ABCDEF<>{}#$%&*/|=+".concat("アイウエオカキクケコサシスセソ")).split("");
+  var cols, drops, glyph, glow, nxt, ys, fs=14, chars=("01ABCDEF<>{}#$%&*/|=+".concat("アイウエオカキクケコサシスセソ")).split("");
   function scol(){ var dark=document.documentElement.getAttribute("data-theme")==="dark"; return dark ? { fade:"rgba(10,10,11,0.10)", base:"#c56b41", hi:"#f0c9a9" } : { fade:"rgba(250,249,245,0.14)", base:"#c15f3c", hi:"#9c3f1c" }; }
-  function size(){ cv.width=splash.clientWidth; cv.height=splash.clientHeight; cols=Math.floor(cv.width/fs); drops=[]; for(var i=0;i<cols;i++)drops[i]=Math.random()*-40; }
+  function size(){ cv.width=splash.clientWidth; cv.height=splash.clientHeight; cols=Math.floor(cv.width/fs); drops=[]; glyph=[]; glow=[]; nxt=[]; ys=[]; for(var i=0;i<cols;i++){drops[i]=Math.random()*-40; nxt[i]=drops[i];} }
   size(); window.addEventListener("resize", size);
   function draw(){ var C=scol(); cx.fillStyle=C.fade; cx.fillRect(0,0,cv.width,cv.height); cx.font=fs+"px ui-monospace,monospace";
-    for(var i=0;i<cols;i++){ var ch=chars[Math.floor(Math.random()*chars.length)]; var x=i*fs, y=drops[i]*fs;
-      cx.fillStyle=(Math.random()>0.975)?C.hi:C.base; cx.fillText(ch,x,y);
-      if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.05+Math.random()*0.06); }
+    for(var i=0;i<cols;i++){ drops[i]+=(0.05+Math.random()*0.06);
+      /* glyph persists between stamps (no flicker); next gap re-rolled 0.4-0.9 cells for organic spacing */
+      if(drops[i]>=nxt[i]||!glyph[i]){ glyph[i]=chars[Math.floor(Math.random()*chars.length)]; glow[i]=Math.random()>0.975; ys[i]=drops[i]*fs; nxt[i]=drops[i]+(0.4+Math.random()*0.5); }
+      cx.fillStyle=glow[i]?C.hi:C.base; cx.fillText(glyph[i],i*fs,ys[i]);
+      if(drops[i]*fs>cv.height && Math.random()>0.975){ drops[i]=0; nxt[i]=0; } }
     if(!splash.classList.contains("hide")) requestAnimationFrame(draw); }
   draw();
   // boot typing
