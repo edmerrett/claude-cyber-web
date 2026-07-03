@@ -1,8 +1,8 @@
 # Security contact for the Claude Cyber Community events site
-Contact: mailto:security@example.com
-Policy: https://example.com/vuln-disclosure
+Contact: https://github.com/edmerrett/claude-cyber-web/issues/new
+Expires: 2027-01-01T00:00:00Z
 Preferred-Languages: en
-Canonical: /.well-known/security.txt
+Canonical: https://claude-cyber-community.pages.dev/.well-known/security.txt
 
 # ------------------------------------------------------------
 # Well, well. A curious one. The console said you'd come.

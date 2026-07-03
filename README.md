@@ -88,9 +88,4 @@ Live: <https://claude-cyber-community.pages.dev>
 
 ---
 
-## Easter egg
-
-`public/.well-known/security.txt` carries a base64 nudge — part of a light
-capture-the-flag trail for the security crowd. Leave it in.
-
 *Community-run. Part of the official Claude Community.*
