@@ -437,8 +437,8 @@ console.log('%cNothing to see here… or is there? 🔍  Two ways in: GET /.well
 (function(){
   var splash=document.getElementById("splash"); if(!splash) return;
   function enter(){ if(splash.classList.contains("hide"))return; splash.classList.add("hide"); try{sessionStorage.setItem("events-entered","1");}catch(e){} }
-  /* Show the splash once per tab; set true during design work to replay on every reload. */
-  var SPLASH_ALWAYS=false;
+  /* Replay the splash on every load (intended); set false to show it only once per tab. */
+  var SPLASH_ALWAYS=true;
   var entered=false; try{entered=!SPLASH_ALWAYS && !!sessionStorage.getItem("events-entered");}catch(e){}
   if(entered){ splash.style.transition="none"; splash.classList.add("hide"); return; }
   splash.addEventListener("click", enter);
