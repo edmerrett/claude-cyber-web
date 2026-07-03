@@ -2,10 +2,11 @@
 Contact: https://github.com/edmerrett/claude-cyber-web/issues/new
 Expires: 2027-01-01T00:00:00Z
 Preferred-Languages: en
-Canonical: https://claude-cyber-community.pages.dev/.well-known/security.txt
+Canonical: https://claude-cyber-web.pages.dev/.well-known/security.txt
 
 # ------------------------------------------------------------
-# Well, well. A curious one. The console said you'd come.
-# You've earned a nudge. Decode it (base64):
-#   VGhlIHZhdWx0IG9wZW5zIHRvIGFuIG9sZCBhcmNhZGUgZ2hvc3QuIFVwIFVwIERvd24gRG93biBMZWZ0IFJpZ2h0IExlZnQgUmlnaHQgQiBBIOKAlCBvbiB0aGUgZXZlbnRzIHBhZ2UgaXRzZWxmLg==
+# So you knocked on the honest door. Manners noted.
+# What follows is not a hint you can paste. It is a memory test.
+# Decode it, sit with it, and remember what your thumbs already know:
+#   VGhpcnR5IGV4dHJhIGxpdmVzLCBmcm9tIHRodW1icyB0aGF0IGNsaWNrZWQgbG9uZyBiZWZvcmUgdGhlIHdlYi4gVHdvIHNreXdhcmQsIHRoZW4gdHdvIHRvIHRoZSBlYXJ0aDsgYSBtaXJyb3JlZCBzdGVwIG91dC1hbmQtYmFjaywgZGFuY2VkIHR3aWNlOyBhbmQgbGFzdCwgYSBiZWUgdGhhdCBib3dzIHRvIGl0cyBhbHBoYS4gVGhhdCBpcyB0aGUgb2xkIHNwZWxsLCBhbmQgbm8sIGl0IGlzIG5vdCB3cml0dGVuIGhlcmUuIFJlY2FsbCBpdCwgZW50ZXIgaXQgb24gdGhlIGV2ZW50cyB0ZXJtaW5hbCwgYW5kIHRoZSB2YXVsdCB3aWxsIGxpc3Rlbi4=
 # ------------------------------------------------------------
