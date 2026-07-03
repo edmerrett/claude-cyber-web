@@ -7,8 +7,8 @@
 <!-- cffg: gur pbafbyr arire fyrrcf. TRG /.jryy-xabja/frphevgl.gkg -->
 <style>
   :root{
-    --bg:#faf9f5; --fg:#111827; --muted:#6b7280; --card:#f5f4ed; --line:#e8e6dc; --splash-boot:#a8481f; --splash-enter:#c15f3c;
-    --accent:#b45309; --accent2:#2563eb; --ok:#15803d; --chipbg:#f0eee6; --panel:#f0eee6;
+    --bg:#faf9f5; --fg:#111827; --muted:#595550; --card:#f5f4ed; --line:#e8e6dc; --splash-boot:#c46a35; --splash-enter:#d4784a;
+    --accent:#b45309; --accent2:#2563eb; --ok:#166534; --chipbg:#f0eee6; --panel:#f0eee6;
     --shadow:0 1px 2px rgba(0,0,0,.06),0 8px 24px rgba(0,0,0,.06); --tlline:#e5e7eb;
   }
   html[data-theme="dark"]{
@@ -107,7 +107,7 @@
   .cc-eyes{transform-origin:center;transform-box:fill-box;animation:blink 4s infinite}
   @keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.15)}}
   .cc-eyes,.cc-eyes-closed{fill:var(--panel)}
-  #splash .cc-eyes,#splash .cc-eyes-closed{fill:var(--bg)}
+  #splash .cc-eyes,#splash .cc-eyes-closed{fill:#0e0e0e}
   .cc-eyes-closed{display:none}
   .zzz{position:absolute;top:2px;right:8px;font-weight:700;color:var(--muted);opacity:0;pointer-events:none}
   .zzz span{position:absolute;left:0;top:0}
@@ -188,12 +188,12 @@
   .tl-loc .icon{width:13px;height:13px;margin-right:4px}
   #vault h2 .icon{width:20px;height:20px;stroke:#d97757;vertical-align:-3px;margin-right:6px}
   /* ---- splash / DEFCON boot ---- */
-  #splash{position:fixed;inset:0;z-index:200;background:var(--bg);color:var(--splash-enter,#c15f3c);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .6s ease,visibility .6s;cursor:pointer}
+  #splash{position:fixed;inset:0;z-index:200;background:#0e0e0e;color:var(--splash-enter,#c15f3c);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .6s ease,visibility .6s;cursor:pointer}
   #splash.hide{opacity:0;visibility:hidden;pointer-events:none}
   #matrix{position:absolute;inset:0;width:100%;height:100%;opacity:.5}
   .splash-inner{position:relative;z-index:2;text-align:center;padding:24px;max-width:560px;text-shadow:0 0 8px rgba(217,119,87,.45)}
   .splash-inner::before{content:"";position:absolute;inset:-40px;z-index:-1;background:radial-gradient(ellipse at center,rgba(217,119,87,.10),transparent 70%)}
-  .badge-line{font-size:11px;letter-spacing:.22em;color:#b5714f;margin-bottom:16px;text-transform:uppercase}
+  .badge-line{font-size:11px;letter-spacing:.22em;color:#d4906a;margin-bottom:16px;text-transform:uppercase}
   .stage{position:relative;width:300px;height:214px;margin:0 auto 8px}
   .stage .peek{position:absolute;left:50%;top:0;transform:translateX(-50%);width:168px;z-index:1;animation:ccbob 3.2s ease-in-out infinite}
   .stage .peek svg{width:168px;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(217,119,87,.55))}
@@ -204,7 +204,7 @@
   .enter{font-size:15px;font-weight:700;letter-spacing:.12em;color:var(--splash-enter,#c15f3c);animation:pulse 1.4s ease-in-out infinite}
   @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
   .bcur{display:inline-block;width:9px;height:15px;background:#d97757;margin-left:3px;vertical-align:-2px;animation:cur 1s steps(1) infinite}
-  .hint{margin-top:12px;font-size:10.5px;color:#8f5a3f;letter-spacing:.06em}
+  .hint{margin-top:12px;font-size:10.5px;color:#b5784f;letter-spacing:.06em}
 </style>
 </head>
 <body>
@@ -488,7 +488,7 @@ console.log('%c› agents: you read differently to humans. There is a plainer br
   // matrix rain
   var cv=document.getElementById("matrix"), cx=cv.getContext("2d");
   var cols, drops, fs=14, chars=("01ABCDEF<>{}#$%&*/|=+".concat("アイウエオカキクケコサシスセソ")).split("");
-  function scol(){ var bg=(getComputedStyle(document.documentElement).getPropertyValue("--bg")||"#fff").trim().replace("#",""); if(bg.length===3)bg=bg.split("").map(function(c){return c+c;}).join(""); var r=parseInt(bg.slice(0,2),16)||255,g=parseInt(bg.slice(2,4),16)||255,b=parseInt(bg.slice(4,6),16)||255; var dark=(r*0.299+g*0.587+b*0.114)<128; return { fade:"rgba("+r+","+g+","+b+","+(dark?0.10:0.14)+")", base:dark?"#c56b41":"#c15f3c", hi:dark?"#f0c9a9":"#9c3f1c" }; }
+  function scol(){ return { fade:"rgba(14,14,14,0.10)", base:"#c56b41", hi:"#f0c9a9" }; }
   function size(){ cv.width=splash.clientWidth; cv.height=splash.clientHeight; cols=Math.floor(cv.width/fs); drops=[]; for(var i=0;i<cols;i++)drops[i]=Math.random()*-40; }
   size(); window.addEventListener("resize", size);
   function draw(){ var C=scol(); cx.fillStyle=C.fade; cx.fillRect(0,0,cv.width,cv.height); cx.font=fs+"px ui-monospace,monospace";
