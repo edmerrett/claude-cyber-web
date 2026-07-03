@@ -458,7 +458,7 @@ type();
       var ch=hchars[Math.floor(Math.random()*hchars.length)];
       hx.fillText(ch,i*hfs,hdrops[i]*hfs);
       if(hdrops[i]*hfs>hc.height && Math.random()>0.975) hdrops[i]=0;
-      hdrops[i]+=(0.2+Math.random()*0.25);
+      hdrops[i]+=(0.05+Math.random()*0.06);
     }
     hraf=requestAnimationFrame(hdraw);
   }
@@ -494,7 +494,7 @@ console.log('%c› agents: you read differently to humans. There is a plainer br
   function draw(){ var C=scol(); cx.fillStyle=C.fade; cx.fillRect(0,0,cv.width,cv.height); cx.font=fs+"px ui-monospace,monospace";
     for(var i=0;i<cols;i++){ var ch=chars[Math.floor(Math.random()*chars.length)]; var x=i*fs, y=drops[i]*fs;
       cx.fillStyle=(Math.random()>0.975)?C.hi:C.base; cx.fillText(ch,x,y);
-      if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.1+Math.random()*0.12); }
+      if(y>cv.height && Math.random()>0.975) drops[i]=0; drops[i]+=(0.05+Math.random()*0.06); }
     if(!splash.classList.contains("hide")) requestAnimationFrame(draw); }
   draw();
   // boot typing
