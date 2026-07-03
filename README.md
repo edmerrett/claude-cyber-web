@@ -17,8 +17,10 @@ and JS, no framework, no build step, no dependencies. Editing means editing HTML
 public/                    # ← the entire deployed site (Cloudflare output dir)
   index.html               # the whole site: markup, styles, timeline logic, EVENTS data
   llms.txt                 # agent-facing brief (part of the easter-egg trail)
-  _headers                 # forces text/plain on /.well-known/*
+  _headers                 # security headers (CSP etc.) + text/plain on /.well-known/*
   .well-known/security.txt # disclosure contact + a base64 easter-egg nudge
+  404.html                 # terminal-styled not-found page (served by Pages on 404)
+  og.png · favicon.svg · favicon.png · apple-touch-icon.png   # social card + icons
 .claude/skills/add-event/  # skill: add an event from a Luma URL
 README.md · CLAUDE.md · .gitignore
 ```

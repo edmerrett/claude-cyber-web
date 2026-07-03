@@ -2,7 +2,7 @@
 Contact: https://github.com/edmerrett/claude-cyber-web/issues/new
 Expires: 2027-01-01T00:00:00Z
 Preferred-Languages: en
-Canonical: https://claude-cyber-web.pages.dev/.well-known/security.txt
+Canonical: https://claude-cyber.com/.well-known/security.txt
 
 # ------------------------------------------------------------
 # So you knocked on the honest door. Manners noted.
