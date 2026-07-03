@@ -299,6 +299,9 @@ var COUNTRIES = {
 var ONLINE_LABEL = '\uD83C\uDF10 Online / Virtual';
 var fmt = function(iso){return new Date(iso).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric',timeZone:'Europe/London'});};
 var ic=function(n){return '<svg class="icon"><use href="#i-'+n+'"></use></svg>';};
+/* Event text/links come from event data (incl. the add-event skill's Luma scrape) — escape before innerHTML. */
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
+var safeUrl=function(u){ u=String(u==null?'':u); return /^(https?:|mailto:)/i.test(u) ? esc(u) : '#'; };
 
 /* ---------- THEME ---------- */
 var root = document.documentElement;
@@ -330,22 +333,18 @@ function currentCountry(){
   return (saved && (saved==='ONLINE' || COUNTRIES[saved])) ? saved : defaultCountry();
 }
 /* Online/virtual events are location-independent, so they show in every country view. */
-function eventsFor(cc){
-  return EVENTS.filter(function(e){ return e.country===cc || e.country==='ONLINE'; })
-               .sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
-}
 function buildItem(e){
   var past = new Date(e.date) < NOW;
   var item = document.createElement('div'); item.className='tl-item'+(past?' past':'');
   var links='';
   if(past){ links = '<div class="links">'+
-     (e.pics?'<a href="'+e.pics+'" target="_blank" rel="noopener">'+ic('camera')+' Pictures</a>':'')+
-     (e.blog?'<a href="'+e.blog+'" target="_blank" rel="noopener">'+ic('file')+' Blog</a>':'')+
-     (e.rec?'<a href="'+e.rec+'" target="_blank" rel="noopener">'+ic('video')+' Recording</a>':'')+'</div>'; }
-  else { links = '<div class="links"><a class="primary" href="'+e.luma+'" target="_blank" rel="noopener">'+ic('ticket')+' Register on Luma</a></div>'; }
+     (e.pics?'<a href="'+safeUrl(e.pics)+'" target="_blank" rel="noopener">'+ic('camera')+' Pictures</a>':'')+
+     (e.blog?'<a href="'+safeUrl(e.blog)+'" target="_blank" rel="noopener">'+ic('file')+' Blog</a>':'')+
+     (e.rec?'<a href="'+safeUrl(e.rec)+'" target="_blank" rel="noopener">'+ic('video')+' Recording</a>':'')+'</div>'; }
+  else { links = '<div class="links"><a class="primary" href="'+safeUrl(e.luma)+'" target="_blank" rel="noopener">'+ic('ticket')+' Register on Luma</a></div>'; }
   item.innerHTML = (past?'':'<span class="upnext">Upcoming</span>')+
-    '<div class="tl-card"><div class="tl-top"><span class="tl-tag">'+e.type+'</span><span class="tl-when">'+fmt(e.date)+'</span></div>'+
-    '<h3>'+e.title+'</h3><p>'+e.blurb+'</p><div class="tl-loc">'+ic('pin')+e.loc+'</div>'+links+'</div>';
+    '<div class="tl-card"><div class="tl-top"><span class="tl-tag">'+esc(e.type)+'</span><span class="tl-when">'+fmt(e.date)+'</span></div>'+
+    '<h3>'+esc(e.title)+'</h3><p>'+esc(e.blurb)+'</p><div class="tl-loc">'+ic('pin')+esc(e.loc)+'</div>'+links+'</div>';
   return item;
 }
 function renderTimeline(){
@@ -434,8 +433,8 @@ console.log('%cNothing to see here… or is there? 🔍  Two ways in: GET /.well
 (function(){
   var splash=document.getElementById("splash"); if(!splash) return;
   function enter(){ if(splash.classList.contains("hide"))return; splash.classList.add("hide"); try{sessionStorage.setItem("events-entered","1");}catch(e){} }
-  /* DESIGN MODE: splash replays on every reload. Set to false (or delete this line) to restore normal "show once per tab" behaviour. */
-  var SPLASH_ALWAYS=true;
+  /* Show the splash once per tab; set true during design work to replay on every reload. */
+  var SPLASH_ALWAYS=false;
   var entered=false; try{entered=!SPLASH_ALWAYS && !!sessionStorage.getItem("events-entered");}catch(e){}
   if(entered){ splash.style.transition="none"; splash.classList.add("hide"); return; }
   splash.addEventListener("click", enter);

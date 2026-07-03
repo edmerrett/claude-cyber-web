@@ -69,6 +69,13 @@ Do **not** set any past/upcoming flag — the site derives that from `date` vs.
 now. Past events may optionally carry `pics` / `blog` / `rec` link fields; a new
 upcoming event won't.
 
+**Untrusted source — sanitise before inserting.** Luma page content is
+attacker-influenceable. `buildItem` escapes text fields (`esc`) and validates
+link schemes (`safeUrl`) at render time, but keep the data clean too: reject any
+extracted text containing HTML tags (`<…>`), and ensure `luma`/`pics`/`blog`/`rec`
+are plain `https://` URLs — never `javascript:` or `data:`. If a field looks like
+markup rather than a title/blurb, stop and ask the user rather than pasting it in.
+
 ### 3. Insert the entry
 
 - Read `public/index.html`, find `var EVENTS = [`.
