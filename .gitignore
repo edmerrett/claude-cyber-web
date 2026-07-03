@@ -1,0 +1,12 @@
+# Cloudflare / wrangler
+.wrangler/
+
+# Local archive of the original site drop — not needed in the repo
+claude-cyber-site.tar.gz
+
+# OS / editor
+.DS_Store
+*.swp
+
+# Node (only if tooling is ever added; the site itself has no build)
+node_modules/

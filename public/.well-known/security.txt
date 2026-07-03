@@ -1,0 +1,11 @@
+# Security contact for the Claude Cyber Community events site
+Contact: mailto:security@example.com
+Policy: https://example.com/vuln-disclosure
+Preferred-Languages: en
+Canonical: /.well-known/security.txt
+
+# ------------------------------------------------------------
+# Well, well. A curious one. The console said you'd come.
+# You've earned a nudge. Decode it (base64):
+#   VGhlIHZhdWx0IG9wZW5zIHRvIGFuIG9sZCBhcmNhZGUgZ2hvc3QuIFVwIFVwIERvd24gRG93biBMZWZ0IFJpZ2h0IExlZnQgUmlnaHQgQiBBIOKAlCBvbiB0aGUgZXZlbnRzIHBhZ2UgaXRzZWxmLg==
+# ------------------------------------------------------------
