@@ -193,6 +193,16 @@
   #vault code{display:inline-block;background:#0f2417;border:1px solid #1f5133;border-radius:8px;padding:10px 14px;margin:10px 0;font-size:15px;color:#eaa987;letter-spacing:.5px}
   #vault p{color:#9fe8bf;font-size:13px;line-height:1.6}
   #vault button{margin-top:16px;background:transparent;border:1px solid #8f5a3f;color:#eaa987;border-radius:8px;padding:8px 16px;font:inherit;cursor:pointer}
+  /* hacker Clawd rappels in when the vault opens */
+  .vdrop{position:relative;height:74px;margin-bottom:10px}
+  .vfall{position:absolute;left:50%;width:96px;margin-left:-48px;animation:vfall 1.1s ease-in-out .35s backwards}
+  @keyframes vfall{0%{transform:translateY(-92vh)}70%{transform:translateY(9px)}85%{transform:translateY(-4px)}100%{transform:translateY(0)}}
+  .vsway{position:relative;animation:vsway 3.6s ease-in-out 1.5s infinite;transform-origin:50% -540px}
+  @keyframes vsway{0%,100%{transform:rotate(0)}30%{transform:rotate(-1deg)}70%{transform:rotate(1deg)}}
+  .vrope{position:absolute;bottom:100%;left:50%;width:2px;height:120vh;margin-left:-1px;background:linear-gradient(to top,#8f5a3f,rgba(143,90,63,.25))}
+  .vhacker{width:96px;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(217,119,87,.35))}
+  .vh-eyes{fill:#0e0e0e;animation:vlook 4.5s ease-in-out 1.8s infinite}
+  @keyframes vlook{0%,50%,100%{transform:translateX(0)}10%,24%{transform:translateX(-.6px)}32%,44%{transform:translateX(.6px)}}
   footer{margin-top:44px;color:var(--muted);font-size:12px;text-align:center}
   /* ---- icons ---- */
   .icon{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;flex:0 0 auto}
@@ -313,6 +323,17 @@
 </div>
 
 <div id="vault"><div class="box">
+  <div class="vdrop"><div class="vfall"><div class="vsway"><i class="vrope"></i>
+<svg class="vhacker" viewBox="0 0 20 14.5" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
+<path fill="#d97757" d="M5 3h10v5H5ZM0 8.5h1v2H0ZM19 8.5h1v2h-1ZM4 12h1v2H4ZM6 12h1v2H6ZM13 12h1v2h-1ZM15 12h1v2h-1Z"/>
+<path fill="#b85f43" d="M5 3h10v1H5Z"/>
+<path fill="#333a45" d="M9 0h2v1H9ZM6 1h8v1H6ZM5 2h10v1H5ZM4 3h1v5H4ZM15 3h1v5h-1ZM3 8h14v4H3ZM1 8.5h2v2H1ZM17 8.5h2v2h-2Z"/>
+<path fill="#232830" d="M7 12v-1.5h.5v-.5h.5v-.5h4v.5h.5v.5h.5V12Z"/>
+<path fill="#454d5a" d="M9 0h1v.5H9ZM6 1h1.5v.5H6Z"/>
+<path fill="#cfd3da" d="M5.75 8h.5v1.5h-.5ZM13.75 8h.5v1.5h-.5Z"/>
+<path fill="#9aa1ab" d="M5.75 9.5h.5v.4h-.5ZM13.75 9.5h.5v.4h-.5Z"/>
+<g class="vh-eyes"><rect x="7" y="4.5" width="1" height="2"/><rect x="12" y="4.5" width="1" height="2"/></g></svg>
+  </div></div></div>
   <h2><svg class="icon"><use href="#i-unlock"></use></svg>Access granted — you found the vault.</h2>
   <p>Nice recon. The bot has been watching you poke around, and it approves.</p>
   <code>CTF{cl4ude_c0de_h4s_y0ur_s1x}</code>
