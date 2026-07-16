@@ -336,7 +336,7 @@
   </div></div></div>
   <h2><svg class="icon"><use href="#i-unlock"></use></svg>Access granted — you found the vault.</h2>
   <p>Nice recon. The bot has been watching you poke around, and it approves.</p>
-  <code>CTF{cl4ude_c0de_h4s_y0ur_s1x}</code>
+  <code id="vflag" aria-live="polite"></code>
   <p>Screenshot this and send it to the organisers to claim your “friendly hacker” badge at the next meet-up.</p>
   <button id="vaultclose">close</button>
 </div></div>
@@ -505,10 +505,21 @@ type();
   hdraw();
 })();
 
-/* ---------- EASTER EGG (layer 3: Konami) ---------- */
-var KONAMI=[38,38,40,40,37,39,37,39,66,65]; var kp=[];
-window.addEventListener('keydown',function(ev){ kp.push(ev.keyCode); kp=kp.slice(-KONAMI.length);
-  if(kp.join(',')===KONAMI.join(',')){ document.getElementById('vault').classList.add('show'); } });
+/* ---------- EASTER EGG (layer 3: Konami) ----------
+   The flag is XOR-encrypted with SHA-256 of the entered sequence, so neither the
+   flag nor the code sits in the source. Only entering the code decrypts it. */
+var VF={ c:'c4b2a3839eef3704460a11f2b5f75eeb8383ef8a3fc96b53fc28e42323',
+  h:'4c451e46c3e874081e573424a7a05e14d5a820073a004a351d780214e883206e', n:10 };
+var kp=[];
+function hx(b){ return Array.prototype.map.call(b,function(x){return('0'+x.toString(16)).slice(-2)}).join(''); }
+function sha(s){ return crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)).then(function(d){return new Uint8Array(d)}); }
+window.addEventListener('keydown',function(ev){ kp.push(ev.keyCode); kp=kp.slice(-VF.n);
+  if(kp.length<VF.n) return; var k;
+  sha(kp.join(',')).then(function(d){ k=d; return sha(hx(k)); }).then(function(v){
+    if(hx(v)!==VF.h) return;   /* wrong code: stay silent */
+    var out=''; for(var i=0;i<VF.c.length;i+=2){ out+=String.fromCharCode(parseInt(VF.c.substr(i,2),16)^k[i/2]); }
+    document.getElementById('vflag').textContent=out;
+    document.getElementById('vault').classList.add('show'); }); });
 document.getElementById('vaultclose').onclick=function(){document.getElementById('vault').classList.remove('show');};
 /* layer 1: console breadcrumb, cryptic on purpose; the answers are earned, not given */
 console.log('%c🛡️ Claude Code security console','color:#f59e0b;font-weight:bold;font-size:14px');
