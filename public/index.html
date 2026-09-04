@@ -183,6 +183,19 @@
   .links a:hover{border-color:var(--accent);color:var(--accent)}
   .links a.primary{background:var(--accent);border-color:var(--accent);color:#fff}
   .links a.primary:hover{color:#fff;opacity:.92}
+  .pics{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .pics a{display:block;width:84px;height:56px;border-radius:8px;overflow:hidden;border:1px solid var(--line);transition:transform .16s,border-color .16s}
+  .pics a:hover{transform:translateY(-1px);border-color:var(--accent)}
+  .pics img{width:100%;height:100%;object-fit:cover;display:block}
+
+  /* lightbox for pinned photos */
+  #lb{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:98}
+  #lb.show{display:flex}
+  #lb img{max-width:min(96vw,1400px);max-height:88vh;border-radius:10px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  #lb button{position:absolute;background:rgba(255,255,255,.12);border:0;color:#fff;font:400 26px/1 system-ui,sans-serif;width:44px;height:44px;border-radius:50%;cursor:pointer}
+  #lb button:hover{background:rgba(255,255,255,.25)}
+  .lb-x{top:16px;right:16px}.lb-p{left:12px;top:50%;margin-top:-22px}.lb-n{right:12px;top:50%;margin-top:-22px}
+  .lb-c{position:absolute;bottom:14px;left:0;right:0;text-align:center;color:#bbb;font-size:12px}
 
   /* easter egg reveal */
   #vault{position:fixed;inset:0;background:rgba(0,0,0,.86);color:#d97757;display:none;
@@ -341,9 +354,17 @@
   <button id="vaultclose">close</button>
 </div></div>
 
+<div id="lb" role="dialog" aria-modal="true" aria-label="Photo">
+  <button class="lb-x" aria-label="Close">&times;</button>
+  <button class="lb-p" aria-label="Previous photo">&lsaquo;</button>
+  <img alt="">
+  <button class="lb-n" aria-label="Next photo">&rsaquo;</button>
+  <div class="lb-c"></div>
+</div>
+
 <script>
 var EVENTS = [
-  {slug:'claude-cyber-meetup-sep26',title:'London | Claude Cyber Meetup',date:'2026-09-03T18:00:00Z',type:'Meet-up',loc:'London, UK',country:'GB',blurb:'An industry-specific meetup for everyone who loves building with Claude — talks, community & keep thinking.',luma:'https://luma.com/claude-1gof'},
+  {slug:'claude-cyber-meetup-sep26',title:'London | Claude Cyber Meetup',date:'2026-09-03T18:00:00Z',type:'Meet-up',loc:'London, UK',country:'GB',blurb:'An industry-specific meetup for everyone who loves building with Claude — talks, community & keep thinking.',luma:'https://luma.com/claude-1gof',pics:'https://drive.google.com/drive/folders/1E2FY3YPpPGy4rslFc8t0vcgFBKA6-Scm',photos:['img/sep26/04885.jpg','img/sep26/04799.jpg','img/sep26/05232.jpg','img/sep26/05140.jpg','img/sep26/05306.jpg']},
   {slug:'claude-cyber-hackathon-nov26',title:'London | Claude Cybersecurity Hackathon',date:'2026-11-04T18:00:00Z',type:'Hackathon',loc:'London, UK',country:'GB',blurb:'Spin the wheel of fortune. Teams get 30 minutes to plan and two hours to build a solution to the cybersecurity topic it lands on, then present back to the group.',luma:'https://luma.com/claude-zl3r'}
 ];
 var NOW = new Date();
@@ -362,6 +383,7 @@ var ic=function(n){return '<svg class="icon"><use href="#i-'+n+'"></use></svg>';
 /* Event text/links come from event data (incl. the add-event skill's Luma scrape) — escape before innerHTML. */
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
 var safeUrl=function(u){ u=String(u==null?'':u); return /^(https?:|mailto:)/i.test(u) ? esc(u) : '#'; };
+var safeImg=function(u){ u=String(u==null?'':u); return /^(https:\/\/[\w.-]+\/|img\/)[\w.\/-]+\.(jpe?g|png|webp)$/i.test(u) ? esc(u) : ''; };
 
 /* ---------- THEME ---------- */
 var root = document.documentElement;
@@ -400,7 +422,8 @@ function buildItem(e){
   if(past){ links = '<div class="links">'+
      (e.pics?'<a href="'+safeUrl(e.pics)+'" target="_blank" rel="noopener">'+ic('camera')+' Pictures</a>':'')+
      (e.blog?'<a href="'+safeUrl(e.blog)+'" target="_blank" rel="noopener">'+ic('file')+' Blog</a>':'')+
-     (e.rec?'<a href="'+safeUrl(e.rec)+'" target="_blank" rel="noopener">'+ic('video')+' Recording</a>':'')+'</div>'; }
+     (e.rec?'<a href="'+safeUrl(e.rec)+'" target="_blank" rel="noopener">'+ic('video')+' Recording</a>':'')+'</div>';
+    if(e.photos&&e.photos.length){ links = '<div class="pics">'+e.photos.map(function(p,i){ var u=safeImg(p); return u?'<a href="'+u+'"><img loading="lazy" src="'+u.replace(/\.(jpe?g|png|webp)$/i,'-t.$1')+'" alt="'+esc(e.title)+' photo '+(i+1)+'"></a>':''; }).join('')+'</div>'+links; } }
   else { links = '<div class="links"><a class="primary" href="'+safeUrl(e.luma)+'" target="_blank" rel="noopener">'+ic('ticket')+' Register on Luma</a></div>'; }
   item.innerHTML = (past?'':'<span class="upnext">Upcoming</span>')+
     '<div class="tl-card"><div class="tl-top"><span class="tl-tag">'+esc(e.type)+'</span><span class="tl-when">'+fmt(e.date)+'</span></div>'+
@@ -455,6 +478,25 @@ function fade(){
 }
 if(tlScroll) tlScroll.addEventListener('scroll', fade, {passive:true});
 window.addEventListener('resize', fade);
+
+/* ---------- LIGHTBOX (pinned photos on past events) ---------- */
+var lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbC=lb.querySelector('.lb-c'), lbList=[], lbI=0;
+function lbShow(i){ lbI=(i+lbList.length)%lbList.length; lbImg.src=lbList[lbI]; lbC.textContent=(lbI+1)+' / '+lbList.length; }
+function lbOpen(list,i){ lbList=list; lb.classList.add('show'); document.body.style.overflow='hidden'; lbShow(i); }
+function lbClose(){ lb.classList.remove('show'); document.body.style.overflow=''; lbImg.removeAttribute('src'); }
+tl.addEventListener('click',function(ev){
+  var a=ev.target.closest('.pics a'); if(!a) return; ev.preventDefault();
+  var as=Array.prototype.slice.call(a.parentNode.querySelectorAll('a'));
+  lbOpen(as.map(function(x){ return x.getAttribute('href'); }), as.indexOf(a));
+});
+lb.addEventListener('click',function(ev){
+  var b=ev.target.closest('button');
+  if(b&&b.className==='lb-p') lbShow(lbI-1); else if(b&&b.className==='lb-n') lbShow(lbI+1); else if(ev.target!==lbImg) lbClose();
+});
+window.addEventListener('keydown',function(ev){
+  if(!lb.classList.contains('show')) return;
+  if(ev.key==='Escape') lbClose(); else if(ev.key==='ArrowLeft') lbShow(lbI-1); else if(ev.key==='ArrowRight') lbShow(lbI+1);
+});
 
 /* ---------- COUNTRY SELECTOR ---------- */
 (function(){

@@ -53,6 +53,7 @@ var EVENTS = [
 | `blurb` | yes | one or two sentences |
 | `luma` | upcoming | RSVP link; used for the "Register on Luma" button |
 | `pics` / `blog` / `rec` | past | optional links shown on past-event cards |
+| `photos` | past | optional array of local image paths (`img/<slug>/<name>.jpg`) pinned as thumbnails that open in a lightbox; each needs a `<name>-t.jpg` thumbnail alongside it |
 
 Cards sort newest-first and split upcoming/past automatically. To support a new
 country, add a row to the `COUNTRIES` map (code → name + flag emoji) and tag
