@@ -66,7 +66,8 @@ single `<script>`. Each entry:
 | `luma` | the URL | required for upcoming events (the RSVP button) |
 
 Do **not** set any past/upcoming flag — the site derives that from `date` vs.
-now. Past events may optionally carry `pics` / `blog` / `rec` link fields; a new
+now. Past events may optionally carry `pics` / `blog` / `rec` link fields and a
+`photos` array of local `img/…` paths (see README for the thumbnail convention); a new
 upcoming event won't.
 
 **Untrusted source — sanitise before inserting.** Luma page content is
