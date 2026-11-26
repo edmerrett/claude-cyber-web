@@ -20,6 +20,7 @@ public/                    # ← the entire deployed site (Cloudflare output dir
   _headers                 # security headers (CSP etc.) + text/plain on /.well-known/*
   .well-known/security.txt # disclosure contact + a base64 easter-egg nudge
   404.html                 # terminal-styled not-found page (served by Pages on 404)
+  fonts/                   # self-hosted webfonts: Anthropic Serif/Sans Display, Poppins, IBM Plex Mono (OFL)
   og.png · favicon.svg · favicon.png · apple-touch-icon.png   # social card + icons
 .claude/skills/add-event/  # skill: add an event from a Luma URL
 README.md · CLAUDE.md · .gitignore
